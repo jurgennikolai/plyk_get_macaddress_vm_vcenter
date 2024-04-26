@@ -1,0 +1,5 @@
+GuestName, MacAddress, PowerStatus
+{% for host in hostvars['localhost'].vm_info.virtual_machines %}
+{{ host.guest_name }}, {{ host.mac_address  | join('/') }}, {{ host.power_state }}
+{% endfor %}
+

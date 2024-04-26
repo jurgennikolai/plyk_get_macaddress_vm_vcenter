@@ -1,0 +1,26 @@
+- name: Get MacAddress of MVs
+  hosts: localhost
+  connection: local
+  vars:
+      ansible_python_interpreter: /usr/bin/python3
+  tasks:
+    - name: Using VMware Modules
+      vmware_vm_info:
+              hostname: 192.168.18.11
+              username: 'myusr@DOMAIN.LOCAL'
+              password: 'mypasswd'
+              validate_certs: false
+      register: vm_info
+
+    - name: Debugging
+      debug:
+              var: vm_info
+
+- name: Creating Report .CSV
+  hosts: localhost
+  connection: local
+  tasks:
+   - name: Using Template with Jinja 2
+     template:
+       src: ./report.template.j2
+       dest: ./report.csv
